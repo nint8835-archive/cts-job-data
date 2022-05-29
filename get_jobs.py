@@ -64,8 +64,6 @@ def parse_job_postings(
     jobs = set()
 
     for company in job_data:
-        if company["company"] == "whalecompany":
-            company["company"] = "heyorca"
         for posting in company["jobs"]:
             if "post_date" in posting:
                 for job in posting["jobs"]:
@@ -81,7 +79,6 @@ def parse_job_postings(
                 if job_obj not in previous_jobs:
                     job_obj.date_posted = commit.authored_datetime.date()
                 else:
-                    print("Job in last jobs, re-using post date")
                     job_obj.date_posted = get_equivalent_job(
                         job_obj, previous_jobs
                     ).date_posted
